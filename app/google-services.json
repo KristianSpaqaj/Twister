@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "977969664519",
+    "project_id": "authenticationlogin-1c01f",
+    "storage_bucket": "authenticationlogin-1c01f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977969664519:android:72438e3694ce33671810a2",
+        "android_client_info": {
+          "package_name": "com.example.firebaseexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977969664519-51889sto756r34ji8uq85dhaqdf5fad7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7gCibSPeVDDlziPJmrLtWj8PoHTu3b1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977969664519-51889sto756r34ji8uq85dhaqdf5fad7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977969664519:android:a66d8861d3691b4e1810a2",
+        "android_client_info": {
+          "package_name": "com.example.twister"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977969664519-51889sto756r34ji8uq85dhaqdf5fad7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7gCibSPeVDDlziPJmrLtWj8PoHTu3b1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977969664519-51889sto756r34ji8uq85dhaqdf5fad7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
