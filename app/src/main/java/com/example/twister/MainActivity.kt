@@ -10,11 +10,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.example.twister.databinding.ActivityMainBinding
+import viewmodel.AuthAppViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: AuthAppViewModel = AuthAppViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,9 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_sign_out -> {
+                viewModel.signOut();
+               findNavController(R.id.nav_host_fragment_content_main).popBackStack(); return true}
             else -> super.onOptionsItemSelected(item)
         }
     }

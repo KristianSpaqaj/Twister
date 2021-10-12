@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class AuthAppRepository {
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     val userLiveData: MutableLiveData<FirebaseUser> = MutableLiveData<FirebaseUser>()
     val loggedOutData: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val errorMessage: MutableLiveData<String> = MutableLiveData<String>()
@@ -13,12 +13,14 @@ class AuthAppRepository {
     init {
         userLiveData.value = FirebaseAuth.getInstance().currentUser
     }
-    fun Register(email: String,password: String) {
+    fun register(email: String,password: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful){
                 userLiveData.value = FirebaseAuth.getInstance().currentUser
+                loggedOutData.value = false
             } else {
                 errorMessage.value = task.exception?.message
+                loggedOutData.value = true
             }
         }
     }
@@ -26,8 +28,10 @@ class AuthAppRepository {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 userLiveData.value = FirebaseAuth.getInstance().currentUser
+                loggedOutData.value = false
             } else {
                 errorMessage.value = task.exception?.message
+                loggedOutData.value = true
             }
         }
     }
