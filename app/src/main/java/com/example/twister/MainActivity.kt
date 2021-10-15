@@ -9,14 +9,18 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.twister.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import viewmodel.AuthAppViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: AuthAppViewModel = AuthAppViewModel()
+    private val viewModel: AuthAppViewModel by viewModels<AuthAppViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -48,8 +54,14 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_sign_out -> {
-                viewModel.signOut();
-               findNavController(R.id.nav_host_fragment_content_main).popBackStack(); return true}
+                if (Firebase.auth.currentUser != null){
+                    viewModel.signOut()
+                    findNavController(R.id.nav_host_fragment_content_main).popBackStack(); return true
+                } else {
+                    Snackbar.make(binding.root, "cannot sign out", Snackbar.LENGTH_LONG).show()
+                }
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

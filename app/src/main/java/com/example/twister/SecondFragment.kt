@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.twister.databinding.FragmentSecondBinding
+import models.GenericAdapter
+import models.Message
 import viewmodel.AuthAppViewModel
+import viewmodel.MessageViewModel
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -16,12 +19,16 @@ import viewmodel.AuthAppViewModel
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-        private val viewModel: AuthAppViewModel by activityViewModels()
+    private val viewModel: AuthAppViewModel by activityViewModels()
+    private val messageViewModel: MessageViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,14 +41,13 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        messageViewModel.messagesLiveData.observe(viewLifecycleOwner){
+            message -> binding.recyclerView.adapter = GenericAdapter<Message>(message){
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
-        binding.buttonLogOut.setOnClickListener {
-            viewModel.signOut()
-            findNavController().popBackStack()
         }
+
+
     }
 
     override fun onDestroyView() {
