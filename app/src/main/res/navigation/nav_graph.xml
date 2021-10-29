@@ -41,6 +41,7 @@
         android:name="com.example.twister.comment"
         android:label="fragment_comment"
         tools:layout="@layout/fragment_comment" >
-        <argument android:name="message" />
+        <argument android:name="message"
+            app:argType="models.Message"/>
     </fragment>
 </navigation>

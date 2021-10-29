@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.twister.databinding.FragmentCommentBinding
 import com.google.gson.Gson
 import models.Comment
@@ -28,6 +29,8 @@ class comment : Fragment() {
     val messageViewModel: MessageViewModel by activityViewModels()
     val authappViewModel: AuthAppViewModel by activityViewModels()
     val message: MutableLiveData<Message> = MutableLiveData<Message>()
+    val comment: MutableLiveData<Comment> = MutableLiveData<Comment>()
+    private val args: commentArgs by navArgs()
 
 
 
@@ -49,12 +52,8 @@ class comment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments == null){
+        binding.messageText.text = args.message.content
 
-        } else {
-            val gson = Gson()
-            message.postValue(gson.fromJson(arguments?.getString("message"),Message::class.java))
-        }
 
         message.observe(viewLifecycleOwner,{
             binding.messageText.text = message.value?.content
@@ -70,7 +69,7 @@ class comment : Fragment() {
             }
 
         }
-        messageViewModel.getComments(837)
+        messageViewModel.getComments(args.message.id)
         messageViewModel.commentsLiveData.observe(viewLifecycleOwner,{
             binding.recyclerComment.adapter = commentAdapter<Comment>(it){
 

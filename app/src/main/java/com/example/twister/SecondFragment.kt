@@ -44,8 +44,8 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         messageViewModel.messagesLiveData.observe(viewLifecycleOwner){
             message -> binding.recyclerView.adapter = GenericAdapter<Message>(message){
-                val gson = Gson()
-                val action = SecondFragmentDirections.actionSecondFragmentToComment(gson.toJson(it))
+
+                val action = SecondFragmentDirections.actionSecondFragmentToComment(it)
                 findNavController().navigate(action)
 
             }
