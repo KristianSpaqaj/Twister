@@ -1,9 +1,9 @@
 package models
 
 data class Comment(val id: Int,val messageId: Int, val content: String, val user: String) {
-    constructor(messageId: Int,content: String,user: String) : this(-1,messageId,content,user)
+    constructor(content: String,user: String) : this(-1,-1,content,user)
 
     override fun toString(): String {
-        return "$id $messageId $content $user"
+        return "$user : $content"
     }
 }

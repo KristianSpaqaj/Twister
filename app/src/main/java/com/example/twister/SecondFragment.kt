@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.twister.databinding.FragmentSecondBinding
+import com.google.gson.Gson
 import models.GenericAdapter
 import models.Message
 import viewmodel.AuthAppViewModel
@@ -43,11 +44,21 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         messageViewModel.messagesLiveData.observe(viewLifecycleOwner){
             message -> binding.recyclerView.adapter = GenericAdapter<Message>(message){
+                val gson = Gson()
+                val action = SecondFragmentDirections.actionSecondFragmentToComment(gson.toJson(it))
+                findNavController().navigate(action)
 
+            }
         }
+        messageViewModel.reload()
+        binding.fab.setOnClickListener{
+            findNavController().navigate(R.id.action_SecondFragment_to_postMessage)
         }
 
-
+        binding.swiperefresh.setOnRefreshListener{
+            messageViewModel.reload()
+            binding.swiperefresh.isRefreshing = false
+        }
     }
 
     override fun onDestroyView() {

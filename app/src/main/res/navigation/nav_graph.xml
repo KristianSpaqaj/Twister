@@ -24,5 +24,23 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_postMessage"
+            app:destination="@id/postMessage" />
+        <action
+            android:id="@+id/action_SecondFragment_to_comment"
+            app:destination="@id/comment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postMessage"
+        android:name="com.example.twister.postMessage"
+        android:label="fragment_post_message"
+        tools:layout="@layout/fragment_post_message" />
+    <fragment
+        android:id="@+id/comment"
+        android:name="com.example.twister.comment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" >
+        <argument android:name="message" />
     </fragment>
 </navigation>

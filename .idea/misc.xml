@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/comment_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/fragment_comment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/fragment_post_message.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/layout/message_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sunsh/AndroidStudioProjects/Twister/app/src/main/res/menu/menu_main.xml" value="0.36666666666666664" />

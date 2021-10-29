@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.twister.R
 
-class GenericAdapter<T>(private val items: List<Message>, private val onItemClicked: (message: Message) -> Unit) :
-    RecyclerView.Adapter<GenericAdapter.MyViewHolder>() {
+class commentAdapter<T>(private val items: List<Comment>, private val onItemClicked: (comment: Comment) -> Unit) :
+    RecyclerView.Adapter<commentAdapter.MyViewHolder>(){
 
     override fun getItemCount(): Int {
         return items.size
@@ -17,7 +17,7 @@ class GenericAdapter<T>(private val items: List<Message>, private val onItemClic
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MyViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.message_list_item, viewGroup, false)
+            .inflate(R.layout.comment_list_item, viewGroup, false)
         return MyViewHolder(view, onItemClicked)
     }
 
@@ -30,9 +30,9 @@ class GenericAdapter<T>(private val items: List<Message>, private val onItemClic
         }
     }
 
-    class MyViewHolder(itemView: View, private val onItemClicked: (message: Message) -> Unit) :
+    class MyViewHolder(itemView: View, private val onItemClicked: (comment: Comment) -> Unit) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val textView: TextView = itemView.findViewById(R.id.message_String)
+        val textView: TextView = itemView.findViewById(R.id.comment_String)
 
         init {
             itemView.setOnClickListener(this)
@@ -43,4 +43,5 @@ class GenericAdapter<T>(private val items: List<Message>, private val onItemClic
 
         }
     }
+
 }
