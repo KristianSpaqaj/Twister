@@ -7,17 +7,21 @@
     android:orientation="vertical"
     tools:context=".comment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/message_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
         android:text="@string/hello_blank_fragment" />
 
     <TextView
         android:id="@+id/comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_comment"
@@ -25,8 +29,8 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:scrollbars="vertical"
         android:layout_height="wrap_content">
-
     </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/button_comment"
@@ -37,6 +41,6 @@
         android:id="@+id/button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete Comment"/>
+        android:text="Delete Message"/>
 
 </LinearLayout>

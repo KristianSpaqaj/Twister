@@ -19,7 +19,6 @@ class MessageViewModel: ViewModel() {
     fun reload() {
         repository.getPosts()
     }
-
     operator fun get(index: Int): Message? {
         return messagesLiveData.value?.get(index)
     }
@@ -31,6 +30,12 @@ class MessageViewModel: ViewModel() {
     }
     fun getComments(messageId: Int){
         repository.getAllComments(messageId)
+    }
+    fun deleteComments(messageId: Int,commentId: Int){
+        repository.deleteComments(messageId,commentId)
+    }
+    fun addComment(messageId: Int, comment: Comment){
+        repository.postComment(messageId, comment)
     }
 
 }

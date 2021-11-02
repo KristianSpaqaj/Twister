@@ -1,10 +1,13 @@
 package com.example.twister
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewTreeLifecycleOwner
@@ -52,12 +55,12 @@ class comment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.messageText.text = args.message.content
-
+        val x = commentArgs.fromBundle(requireArguments())
+        message.value = x.message
 
         message.observe(viewLifecycleOwner,{
             binding.messageText.text = message.value?.content
-
+            messageViewModel.getComments(args.message.id)
         })
         binding.buttonDelete.setOnClickListener{
             val id : Int = message.value?.id ?: return@setOnClickListener
@@ -69,12 +72,38 @@ class comment : Fragment() {
             }
 
         }
-        messageViewModel.getComments(args.message.id)
         messageViewModel.commentsLiveData.observe(viewLifecycleOwner,{
             binding.recyclerComment.adapter = commentAdapter<Comment>(it){
+                val builder : AlertDialog.Builder = AlertDialog.Builder(requireContext())
 
+                builder.setMessage("Delete Comment?").setPositiveButton("Yes", DialogInterface.OnClickListener{ dialog, id ->
+                    messageViewModel.deleteComments(message.value?.id!!, it.id)
+                }).setNegativeButton("Cancel", DialogInterface.OnClickListener {dialog, id ->
+                    dialog.cancel()
+                })
+                if(authappViewModel.userLiveData.value?.email == it.user) {
+                    builder.show()
+                }
             }
         })
+        binding.buttonComment.setOnClickListener{
+            val builder : AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            val input = EditText(requireContext())
+            builder.setView(input)
+            builder.setMessage("Add a comment").setPositiveButton("Comment", DialogInterface.OnClickListener{dialog, id ->
+                val addComment = Comment(1,message.value?.id!!,input.text.toString(),authappViewModel.userLiveData.value?.email.toString())
+                messageViewModel.addComment(message.value?.id!!,addComment)
+            }).setNegativeButton("Cancel", DialogInterface.OnClickListener{dialog, id ->
+                dialog.cancel()
+            })
+            builder.show()
+        }
+        binding.swiperefresh.setOnRefreshListener{
+            messageViewModel.getComments(message.value?.id!!)
+            binding.swiperefresh.isRefreshing = false
+        }
+
+
     }
 
 }

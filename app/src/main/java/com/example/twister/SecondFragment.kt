@@ -44,10 +44,8 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         messageViewModel.messagesLiveData.observe(viewLifecycleOwner){
             message -> binding.recyclerView.adapter = GenericAdapter<Message>(message){
-
                 val action = SecondFragmentDirections.actionSecondFragmentToComment(it)
                 findNavController().navigate(action)
-
             }
         }
         messageViewModel.reload()

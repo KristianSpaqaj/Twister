@@ -100,6 +100,40 @@ class MessageRepository {
         })
     }
 
+    fun deleteComments(messageId: Int, commentId: Int){
+        messageService.deleteComment(messageId, commentId).enqueue(object : Callback<Comment>{
+            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
+                if (response.isSuccessful){
+                    updateMessage.postValue("Deleted: " + response.message())
+                } else {
+                    val message = response.code().toString() + " " + response.message()
+                    errorMessage.postValue(message)
+                }
+            }
+            override fun onFailure(call: Call<Comment>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+
+        })
+    }
+
+    fun postComment(messageId: Int, comment: Comment){
+        messageService.postComment(messageId, comment).enqueue(object : Callback<Comment>{
+            override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
+                if (response.isSuccessful){
+                    updateMessage.postValue("Deleted: " + " " + response.message())
+                } else {
+                    val message = response.code().toString() + " " + response.message()
+                    errorMessage.postValue(message)
+                }
+            }
+
+            override fun onFailure(call: Call<Comment>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
+    }
+
 
 
 }
