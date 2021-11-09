@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.twister.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="Login"
         tools:layout="@layout/fragment_first">
 
         <action
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.twister.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Messages"
         tools:layout="@layout/fragment_second">
 
         <action
@@ -34,12 +34,12 @@
     <fragment
         android:id="@+id/postMessage"
         android:name="com.example.twister.postMessage"
-        android:label="fragment_post_message"
+        android:label="Write your own message"
         tools:layout="@layout/fragment_post_message" />
     <fragment
         android:id="@+id/comment"
         android:name="com.example.twister.comment"
-        android:label="fragment_comment"
+        android:label="View comments"
         tools:layout="@layout/fragment_comment" >
         <argument android:name="message"
             app:argType="models.Message"/>

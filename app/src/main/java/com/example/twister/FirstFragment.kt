@@ -57,9 +57,7 @@ class FirstFragment : Fragment() {
             }
             viewModel.register(email, password)
 
-            if(viewModel.loggedOutData.value == false){
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-            }
+
         }
 
         binding.buttonSignIn.setOnClickListener{
@@ -75,9 +73,13 @@ class FirstFragment : Fragment() {
             }
             viewModel.signIn(email, password)
 
-            if(viewModel.loggedOutData.value == false){
+
+        }
+        viewModel.userLiveData.observe(viewLifecycleOwner){user ->
+            if (user != null){
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
+
         }
     }
 

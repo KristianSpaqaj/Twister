@@ -70,15 +70,18 @@ class MessageRepository {
         messageService.postMessage(message).enqueue(object : Callback<Message>{
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
                 if (response.isSuccessful){
+                    Log.d("KAGE","Added: " + response.body())
                         updateMessage.postValue("Added: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessage.postValue(message)
+                    Log.d("KAGE",message)
                 }
             }
 
             override fun onFailure(call: Call<Message>, t: Throwable) {
                 errorMessage.postValue(t.message)
+                Log.d("KAGE",t.message!!)
             }
         })
     }
@@ -87,6 +90,7 @@ class MessageRepository {
         messageService.deleteMessage(id).enqueue(object : Callback<Message>{
             override fun onResponse(call: Call<Message>, response: Response<Message>) {
                 if (response.isSuccessful){
+                    Log.d("KAGE","Deleted: " + response.body())
                     updateMessage.postValue("Deleted: " + response.body())
                 } else {
                     val message = response.code().toString() + " " + response.message()
@@ -104,14 +108,17 @@ class MessageRepository {
         messageService.deleteComment(messageId, commentId).enqueue(object : Callback<Comment>{
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
                 if (response.isSuccessful){
+                    Log.d("KAGE", "Deleted: " + response.body())
                     updateMessage.postValue("Deleted: " + response.message())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessage.postValue(message)
+                    Log.d("KAGE",message)
                 }
             }
             override fun onFailure(call: Call<Comment>, t: Throwable) {
                 errorMessage.postValue(t.message)
+                Log.d("KAGE",t.message!!)
             }
 
         })
@@ -121,15 +128,18 @@ class MessageRepository {
         messageService.postComment(messageId, comment).enqueue(object : Callback<Comment>{
             override fun onResponse(call: Call<Comment>, response: Response<Comment>) {
                 if (response.isSuccessful){
+                    Log.d("KAGE", "Deleted: " + response.body())
                     updateMessage.postValue("Deleted: " + " " + response.message())
                 } else {
                     val message = response.code().toString() + " " + response.message()
                     errorMessage.postValue(message)
+                    Log.d("KAGE",message)
                 }
             }
 
             override fun onFailure(call: Call<Comment>, t: Throwable) {
                 errorMessage.postValue(t.message)
+                Log.d("KAGE",t.message!!)
             }
         })
     }
