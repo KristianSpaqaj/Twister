@@ -1,10 +1,13 @@
 package com.example.twister
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.twister.databinding.FragmentSecondBinding
@@ -20,7 +23,7 @@ import viewmodel.MessageViewModel
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-    private val viewModel: AuthAppViewModel by activityViewModels()
+    private val authappViewModel: AuthAppViewModel by activityViewModels()
     private val messageViewModel: MessageViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
@@ -46,8 +49,20 @@ class SecondFragment : Fragment() {
             }
         }
         messageViewModel.reload()
+        //binding.fab.setOnClickListener{
+        //    findNavController().navigate(R.id.action_SecondFragment_to_postMessage)
+        //}
         binding.fab.setOnClickListener{
-            findNavController().navigate(R.id.action_SecondFragment_to_postMessage)
+            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            val input = EditText(requireContext())
+            builder.setView(input)
+            builder.setMessage("Add a message").setPositiveButton("Add",DialogInterface.OnClickListener{ dialog, id ->
+                val addMessage = Message(input.text.toString(), authappViewModel.userLiveData.value?.email.toString(),0)
+                messageViewModel.add(addMessage)
+            }).setNegativeButton("Cancel", DialogInterface.OnClickListener {dialog, id ->
+                dialog.cancel()
+            })
+            builder.show()
         }
 
         binding.swiperefresh.setOnRefreshListener{

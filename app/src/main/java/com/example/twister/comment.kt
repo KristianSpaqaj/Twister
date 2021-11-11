@@ -86,7 +86,11 @@ class comment : Fragment() {
             builder.setView(input)
             builder.setMessage("Add a comment").setPositiveButton("Comment", DialogInterface.OnClickListener{dialog, id ->
                 val addComment = Comment(1,message.value?.id!!,input.text.toString(),authappViewModel.userLiveData.value?.email.toString())
-                messageViewModel.addComment(message.value?.id!!,addComment)
+                if (addComment.content.isNullOrEmpty()){
+                    input.error = "Du skal udfylde noget"
+                } else {
+                    messageViewModel.addComment(message.value?.id!!,addComment)
+                }
             }).setNegativeButton("Cancel", DialogInterface.OnClickListener{dialog, id ->
                 dialog.cancel()
             })

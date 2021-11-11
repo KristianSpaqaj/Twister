@@ -42,6 +42,9 @@ class ExampleInstrumentedTest {
         onView(withId(R.id.button_sign_in))
             .perform(click());
         pause(1000);
+        onView(withId(R.id.button_sign_in))
+            .perform(click());
+        pause(1000);
         onView(withId(R.id.recycler_view))
             .check(matches(isDisplayed()));
 

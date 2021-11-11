@@ -9,7 +9,7 @@ class AuthAppViewModel : ViewModel() {
     private val repository: AuthAppRepository = AuthAppRepository()
     val userLiveData: MutableLiveData<FirebaseUser> = MutableLiveData<FirebaseUser>()
     val errorMessage: MutableLiveData<String> = MutableLiveData<String>()
-    val loggedOutData  : MutableLiveData<Boolean> = MutableLiveData<Boolean>(true)
+    val loggedOutData  : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     fun register(email: String, password: String){
         repository.register(email,password)
@@ -25,6 +25,6 @@ class AuthAppViewModel : ViewModel() {
     }
     fun signOut(){
         repository.signOut()
-        loggedOutData.value = repository.loggedOutData.value
+        loggedOutData.value = true
     }
 }

@@ -72,13 +72,13 @@ class FirstFragment : Fragment() {
                 return@setOnClickListener
             }
             viewModel.signIn(email, password)
-
-
-        }
-        viewModel.userLiveData.observe(viewLifecycleOwner){user ->
-            if (user != null){
+            if (viewModel.loggedOutData.value == false){
                 findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
+        //viewModel.userLiveData.observe(viewLifecycleOwner){user ->
+            //if (user != null){
+              //  findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            //}
 
         }
     }
